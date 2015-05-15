@@ -30,7 +30,7 @@ app.use((err, request, response, next) => {
   response
     .status(err.status || 500)
     .json({
-      title: 'Raptor Alerts: Error',
+      title: 'Raptor Bugs: Error',
       message: err.message,
       error: err
     });

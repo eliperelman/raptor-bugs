@@ -1,7 +1,6 @@
 var Regression = require('../regression');
 var config = require('../config.json');
 var express = require('express');
-var async = require('async');
 var fs = require('fs');
 var path = require('path');
 var util = require('util');
