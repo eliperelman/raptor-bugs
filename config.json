@@ -1,0 +1,16 @@
+{
+  "apps": {
+    "calendar": [1, "Calendar", "Gaia::Calendar"],
+    "camera":   [2, "Camera", "Gaia::Camera"],
+    "clock":    [3, "Clock", "Gaia::Clock"],
+    "contacts": [4, "Contacts", "Gaia::Contacts"],
+    "email":    [5, "E-mail", "Gaia::E-Mail"],
+    "fmradio":  [6, "FM Radio", "Gaia::FMRadio"],
+    "gallery":  [7, "Gallery", "Gaia::Gallery"],
+    "messages": [8, "Messages", "Gaia::SMS"],
+    "music":    [9, "Music", "Gaia::Music"],
+    "phone":    [10, "Phone", "Gaia::Dialer"],
+    "settings": [11, "Settings", "Gaia::Settings"],
+    "video":    [12, "Video", "Gaia::Video"]
+  }
+}
