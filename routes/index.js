@@ -91,9 +91,6 @@ var reportRegressions = (groups) => {
     return reportGroup(group);
   });
 
-  console.log(promises.length);
-  console.log(promises);
-
   return Promise.all(promises);
 };
 

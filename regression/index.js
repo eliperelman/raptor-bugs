@@ -12,7 +12,7 @@ const BZ_CC_LIST = [
   'eperelman@mozilla.com',
   'bchien@mozilla.com'
 ];
-const TWO_DAYS = 1000 * 60 * 60 * 24 * 2;
+const ONE_DAY = 1000 * 60 * 60 * 24;
 
 var Regression = function(props, appKey) {
   var app = config.apps[appKey];
@@ -33,8 +33,8 @@ var Regression = function(props, appKey) {
   this.version = BZ_VERSION;
   this.time = this.push_timestamp * 1000;
   this.timeDate = new Date(this.time);
-  this.from = this.time - TWO_DAYS;
-  this.to = this.time + TWO_DAYS;
+  this.from = this.time - ONE_DAY;
+  this.to = this.time + ONE_DAY;
 };
 
 Regression.prototype.hasImproved = function() {
@@ -83,6 +83,8 @@ Regression.prototype.report = function() {
   if (!this.summary) {
     this.summary = `Performance regression in ${this.appName}`;
   }
+
+  console.log(this.summary);
 
   if (!this.description) {
     this.description = `On ${nowString}, Raptor detected a possible regression in ${this.appName}:
