@@ -10,6 +10,7 @@ var groupRegressions = (data) => {
   if (!data) {
     return Promise.reject(new Error('No data received'));
   }
+
   var device = data.device;
   var branch = data.branch;
   var memory = data.memory;
@@ -66,9 +67,9 @@ var reportGroup = (group) => {
   var first = group[0];
 
   first.component = 'Performance';
-  first.apps = group.reduce((accumulator, regression) => {
-    var value = (regression.newavg - regression.oldavg).toFixed(2);
-    return accumulator + regression.appName + ': ' + value + 'ms\n';
+  first.apps = group.reduce((accumulator, entry) => {
+    var value = (entry.newavg - entry.oldavg).toFixed(2);
+    return accumulator + entry.appName + ': regressed by ' + value + 'ms\n';
   }, '');
 
   return Regression.reportMetaBug(first);

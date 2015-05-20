@@ -2,17 +2,14 @@ var config = require('../config.json');
 var db = require('../db');
 var bugzilla = require('../bugzilla');
 
+const ONE_DAY = 1000 * 60 * 60 * 24;
 const BZ_PRODUCT = 'Firefox OS';
-const BZ_KEYWORDS = ['perf'];
+const BZ_KEYWORDS = ['perf', 'regression'];
 const BZ_OPERATING_SYSTEM = 'Gonk (Firefox OS)';
 const BZ_PLATFORM = 'ARM';
 const BZ_SEVERITY = 'major';
 const BZ_VERSION = 'unspecified';
-const BZ_CC_LIST = [
-  'eperelman@mozilla.com',
-  'bchien@mozilla.com'
-];
-const ONE_DAY = 1000 * 60 * 60 * 24;
+const BZ_CC_LIST = config.cc;
 
 var Regression = function(props, appKey) {
   var app = config.apps[appKey];
@@ -96,9 +93,9 @@ Time: ${this.timeDate}
 
 ---
 
-Old Average: ${this.oldavg.toFixed(3)}
-New Average: ${this.newavg.toFixed(3)}
-Regression: ${(this.newavg - this.oldavg).toFixed(2)}
+Old Average: ${this.oldavg.toFixed(3)}ms
+New Average: ${this.newavg.toFixed(3)}ms
+Regression: ${(this.newavg - this.oldavg).toFixed(2)}ms
 
 Confidence level of this being legitimate regression: ${this.confidence.toFixed(2)}
 

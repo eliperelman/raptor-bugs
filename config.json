@@ -1,4 +1,8 @@
 {
+  "cc": [
+    "eperelman@mozilla.com",
+    "bchien@mozilla.com"
+  ]
   "apps": {
     "calendar": [1, "Calendar", "Gaia::Calendar"],
     "camera":   [2, "Camera", "Gaia::Camera"],
