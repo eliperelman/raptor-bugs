@@ -39,21 +39,19 @@ Regression.prototype.hasImproved = function() {
 };
 
 Regression.prototype.remember = function() {
-  return db
-    .query('insert into pg_regressions (timestamp, appName, device, branch, memory) values ($1, $2, $3, $4, $5)', [
-      this.push_timestamp,
-      this.appName,
-      this.device,
-      this.branch,
-      this.memory
-    ]);
+  return query('insert into pg_regressions (timestamp, appName, device, branch, memory) values ($1, $2, $3, $4, $5)', [
+    this.push_timestamp,
+    this.appName,
+    this.device,
+    this.branch,
+    this.memory
+  ]);
 };
 
 Regression.prototype.hasReported = function() {
   var regression = this;
 
-  return db
-    .query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`)
+  return query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`)
     .then(result => {
       return !!result.rows;
     });
