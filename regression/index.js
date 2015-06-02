@@ -1,5 +1,5 @@
 var config = require('../config.json');
-var db = require('../db');
+var query = require('../db');
 var bugzilla = require('../bugzilla');
 
 const ONE_DAY = 1000 * 60 * 60 * 24;
@@ -39,50 +39,24 @@ Regression.prototype.hasImproved = function() {
 };
 
 Regression.prototype.remember = function() {
-  var regression = this;
-
-  return new Promise((resolve, reject) => {
-    db.connect(err => {
-      if (err) {
-        return reject(err);
-      }
-
-      db.query('insert into pg_regressions (timestamp, appName, device, branch, memory) values ($1, $2, $3, $4, $5)', [
-        regression.push_timestamp,
-        regression.appName,
-        regression.device,
-        regression.branch,
-        regression.memory
-      ], function(err, result) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve(result);
-        }
-      })
-    });
-  });
+  return db
+    .query('insert into pg_regressions (timestamp, appName, device, branch, memory) values ($1, $2, $3, $4, $5)', [
+      this.push_timestamp,
+      this.appName,
+      this.device,
+      this.branch,
+      this.memory
+    ]);
 };
 
 Regression.prototype.hasReported = function() {
   var regression = this;
 
-  return new Promise((resolve, reject) => {
-    db.connect(err => {
-      if (err) {
-        return reject(err);
-      }
-
-      db.query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`, (err, result) => {
-        if (err || result.rows[0]) {
-          reject(err);
-        } else {
-          db.end();
-          resolve();
-        }
-      });
+  return db
+    .query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`)
+    .then(result => {
+      return !!result.rows;
     });
-  });
 };
 
 Regression.prototype.report = function() {
