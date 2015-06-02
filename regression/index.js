@@ -53,7 +53,7 @@ Regression.prototype.hasReported = function() {
 
   return query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`)
     .then(result => {
-      return !!result.rows;
+      return !!result.rows.length;
     });
 };
 
