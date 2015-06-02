@@ -1,10 +1,3 @@
-var Datastore = require('nedb');
-var path = require('path');
+var pg = require('pg');
 
-var db = new Datastore({
-  filename: './alerts.db',
-  autoload: true,
-  inMemoryOnly: false
-});
-
-module.exports = db;
+module.exports = new pg.Client(process.env.DATABASE_URL);
