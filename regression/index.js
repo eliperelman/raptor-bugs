@@ -73,7 +73,7 @@ Regression.prototype.hasReported = function() {
         return reject(err);
       }
 
-      client.query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`, (err, result) => {
+      db.query(`select * from pg_regressions where timestamp='${regression.push_timestamp}' and appName='${regression.appName}' and device='${regression.device}' and branch='${regression.branch}' and memory=${regression.memory}`, (err, result) => {
         if (err || result.rows[0]) {
           reject(err);
         } else {
