@@ -61,7 +61,7 @@ Regression.prototype.report = function() {
   var nowString = new Date().toDateString();
 
   if (!this.url) {
-    this.url = `http://raptor.mozilla.org/#/dashboard/script/mark.js?device=${this.device}&branch=${this.branch}&memory=${this.memory}&suite=coldlaunch&to=${this.to}&from=${this.from}&panelId=${this.appIndex}&fullscreen`;
+    this.url = `http://raptor.mozilla.org/#/dashboard/script/apps.js?device=${this.device}&branch=${this.branch}&memory=${this.memory}&series=coldlaunch.*&to=${this.to}&from=${this.from}&panelId=${this.appIndex}&fullscreen`;
   }
 
   if (!this.summary) {
@@ -129,7 +129,7 @@ Regression.prototype.toBug = function() {
 
 Regression.reportMetaBug = function(meta) {
   var date = new Date().toDateString();
-  var url = `http://raptor.mozilla.org/#/dashboard/script/mark.js?device=${meta.device}&branch=${meta.branch}&memory=${meta.memory}&suite=coldlaunch&to=${meta.to}&from=${meta.from}`;
+  var url = `http://raptor.mozilla.org/#/dashboard/script/apps.js?device=${meta.device}&branch=${meta.branch}&memory=${meta.memory}&series=coldlaunch.*&to=${meta.to}&from=${meta.from}`;
 
   return Regression.prototype.report.call({
     component: meta.component,
